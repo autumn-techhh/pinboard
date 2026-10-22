@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pinboard</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23e60023'/%3E%3Ccircle cx='16' cy='13' r='5' fill='white'/%3E%3Cpath d='M16 18v8' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <script>
+    // Apply saved theme before first paint to avoid a flash
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header id="nav" class="nav hidden">
+    <a class="logo" href="#/" aria-label="Home">
+      <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="16" fill="#e60023"/><circle cx="16" cy="13" r="5" fill="#fff"/><path d="M16 18v8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+    </a>
+    <a class="nav-link" href="#/" data-route="home">Home</a>
+    <a class="nav-link" href="#/following" data-route="following">Following</a>
+    <button class="btn primary" id="createBtn">Create</button>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search" placeholder="Search pins" autocomplete="off">
+    </form>
+    <a class="icon-btn" href="#/chat" id="chatLink" title="Messages" aria-label="Messages">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2z"/></svg>
+      <span class="badge hidden" id="chatBadge">0</span>
+    </a>
+    <button class="icon-btn" id="themeBtn" title="Toggle light/dark theme" aria-label="Toggle theme"></button>
+    <a class="avatar-link" id="meLink" href="#/" title="Your profile"></a>
+    <button class="btn" id="logoutBtn">Log out</button>
+  </header>
+
+  <main id="view"></main>
+  <div id="modalRoot"></div>
+  <div id="toasts"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
